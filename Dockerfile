@@ -24,7 +24,7 @@ ENV STRATUM_URL="${STRATUM}://${URL}:${PORT}#xnsub"
 
 # Update system and install necessary dependencies
 RUN apt-get update && \
-    apt-get install -y wget tar libsodium-dev && \
+    apt-get install -y wget tar curl jq libsodium-dev && \
     rm -rf /var/lib/apt/lists/*
 
 # Set working directory
