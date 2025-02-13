@@ -19,6 +19,9 @@ ENV CPU=2
 ENV API_PORT=8080
 ENV API_PASS=""
 
+# New variable for selecting the miner architecture
+ENV ARCH_TYPE="hellminer_linux64.tar.gz"  # Default, options: hellminer_linux64_avx.tar.gz, hellminer_linux64_avx2.tar.gz
+
 # Install necessary dependencies
 RUN apt-get update && \
     apt-get install -y wget tar curl jq libsodium-dev && \
