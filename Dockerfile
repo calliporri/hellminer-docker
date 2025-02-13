@@ -30,10 +30,11 @@ RUN apt-get update && \
 # Set working directory
 WORKDIR /home
 
-# Download and extract Hellminer
-RUN wget https://github.com/hellcatz/luckpool/raw/master/miners/hellminer_cpu_linux.tar.gz && \
-    tar -xvf hellminer_cpu_linux.tar.gz && \
-    rm hellminer_cpu_linux.tar.gz
+# Fetch latest tag and download the latest Hellminer release
+RUN LATEST_TAG=$(curl -s https://api.github.com/repos/hellcatz/hminer/releases/latest | jq -r .tag_name) && \
+    wget "https://github.com/hellcatz/hminer/releases/download/${LATEST_TAG}/hellminer_linux64.tar.gz" -O hellminer.tar.gz && \
+    tar -xvf hellminer.tar.gz && \
+    rm hellminer.tar.gz
 
 # Ensure the binary is executable
 RUN chmod +x hellminer
