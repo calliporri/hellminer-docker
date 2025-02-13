@@ -13,6 +13,11 @@ rm hellminer.tar.gz
 # Ensure the binary is executable
 chmod +x hellminer
 
+# Construct the stratum URL dynamically
+STRATUM_URL="${STRATUM}://${URL}:${PORT}#xnsub"
+
+echo "Stratum URL: $STRATUM_URL"
+
 # Start mining with provided environment variables
 echo "Starting Hellminer..."
 exec ./hellminer -c "$STRATUM_URL" -u "$WALLET.$WORKER" -p x --cpu "$CPU" --api-port="$API_PORT" --api-pass="$API_PASS"
