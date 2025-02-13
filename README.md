@@ -3,10 +3,7 @@
 This repository provides a Docker container for **Hellminer**, an optimized CPU miner for Verus Coin (VRSC). The container is based on Ubuntu and includes all necessary dependencies to start mining immediately.
 
 _________
- [![Sponsor](https://img.shields.io/badge/Sponsor-Click%20Here-ff69b4)](https://github.com/sponsors/simeononsecurity) [![Docker Image Build](https://github.com/simeononsecurity/docker-ubuntu-hardened/actions/workflows/docker-image.yml/badge.svg)](https://github.com/simeononsecurity/docker-ubuntu-hardened/actions/workflows/docker-image.yml)[![VirusTotal Scan](https://github.com/simeononsecurity/docker-ubuntu-hardened/actions/workflows/virustotal.yml/badge.svg)](https://github.com/simeononsecurity/docker-ubuntu-hardened/actions/workflows/virustotal.yml)
-
-[DockerHub](https://hub.docker.com/r/simeononsecurity/hellminer)
-
+ [![Sponsor](https://img.shields.io/badge/Sponsor-Click%20Here-ff69b4)](https://github.com/sponsors/simeononsecurity) [![DockerHub](https://img.shields.io/badge/DockerHub-View%20Image-blue?logo=docker)](https://hub.docker.com/r/simeononsecurity/hellminer)
 
 _________
 
