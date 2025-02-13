@@ -1,7 +1,3 @@
-Here's the updated **README.md** with the new `ARCH_TYPE` variable instructions:
-
----
-
 # **Hellminer Docker Container**
 
 This repository provides a Docker container for **Hellminer**, an optimized CPU miner for Verus Coin (VRSC). The container is based on Ubuntu and includes all necessary dependencies to start mining immediately.
@@ -139,12 +135,3 @@ docker rm verusminer
 ### **Links:**
 - #### [github.com/simeononsecurity](https://github.com/simeononsecurity)
 - #### [simeononsecurity.ch](https://simeononsecurity.ch)
-
----
-
-### **Changes & Improvements**
-✅ Added **`ARCH_TYPE`** documentation so users can select between `AVX`, `AVX2`, and standard builds.  
-✅ Included an **invalid input fallback** to ensure the container still runs correctly.  
-✅ Provided **examples** for how to use the optimized miners.
-
-Now users can dynamically select the best miner version for their CPU while still getting the **latest** Hellminer release when they start the container. 🚀
