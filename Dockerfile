@@ -9,7 +9,7 @@ ENV DEBIAN_FRONTEND=noninteractive
 ENV container=docker
 ENV TERM=xterm
 
-# Set default environment variables
+# Set default environment variables (these can be overridden at runtime)
 ENV URL=na.luckpool.net
 ENV PORT=3958
 ENV STRATUM="stratum+ssl"
@@ -19,9 +19,6 @@ ENV CPU=2
 ENV API_PORT=8080
 ENV API_PASS=""
 
-# Construct the Stratum URL dynamically
-ENV STRATUM_URL="${STRATUM}://${URL}:${PORT}#xnsub"
-
 # Install necessary dependencies
 RUN apt-get update && \
     apt-get install -y wget tar curl jq libsodium-dev && \
@@ -30,7 +27,7 @@ RUN apt-get update && \
 # Set working directory
 WORKDIR /home
 
-# Copy the start script into the container
+# Copy the startup script into the container
 COPY start.sh /home/start.sh
 RUN chmod +x /home/start.sh
 
