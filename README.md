@@ -134,4 +134,4 @@ docker rm verusminer
 
 ### **Links:**
 - #### [github.com/simeononsecurity](https://github.com/simeononsecurity)
-- #### [simeononsecurity.ch](https://simeononsecurity.ch)
+- #### [simeononsecurity.com](https://simeononsecurity.com)
