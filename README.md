@@ -1,29 +1,35 @@
-# Hellminer Docker Container
+Here's the updated **README.md** with the new `ARCH_TYPE` variable instructions:
+
+---
+
+# **Hellminer Docker Container**
 
 This repository provides a Docker container for **Hellminer**, an optimized CPU miner for Verus Coin (VRSC). The container is based on Ubuntu and includes all necessary dependencies to start mining immediately.
 
 _________
- [![Sponsor](https://img.shields.io/badge/Sponsor-Click%20Here-ff69b4)](https://github.com/sponsors/simeononsecurity) [![DockerHub](https://img.shields.io/badge/DockerHub-View%20Image-blue?logo=docker)](https://hub.docker.com/r/simeononsecurity/hellminer)
-
+[![Sponsor](https://img.shields.io/badge/Sponsor-Click%20Here-ff69b4)](https://github.com/sponsors/simeononsecurity) [![DockerHub](https://img.shields.io/badge/DockerHub-View%20Image-blue?logo=docker)](https://hub.docker.com/r/simeononsecurity/hellminer)
 _________
 
-## Features
+## **Features**
 - Supports **stratum+tcp** and **stratum+ssl** connections.
 - Defaults to **stratum+ssl** with port **3958**.
 - Configurable wallet, worker name, CPU count, and pool connection.
 - Exposes an optional API for monitoring.
 - Includes a built-in health check to ensure the miner is running.
+- Allows selection of optimized miner binaries (`AVX` or `AVX2`).
 - Lightweight and minimal dependencies.
 
-## Usage
+---
 
-### Pull the Docker Image
-```
+## **Usage**
+
+### **Pull the Docker Image**
+```sh
 docker pull simeononsecurity/hellminer:latest
 ```
 
-### Run the Miner
-```
+### **Run the Miner**
+```sh
 docker run -itd \
   -e STRATUM="stratum+ssl" \
   -e URL="na.luckpool.net" \
@@ -33,11 +39,41 @@ docker run -itd \
   -e CPU=2 \
   -e API_PORT=8080 \
   -e API_PASS="" \
+  -e ARCH_TYPE="hellminer_linux64.tar.gz" \
   --name verusminer \
   simeononsecurity/hellminer:latest
 ```
 
-### Configuration Options
+---
+
+## **Selecting the Miner Version**
+The `ARCH_TYPE` variable allows you to choose between different optimized miner binaries:
+
+| **ARCH_TYPE Value**             | **Description**                                      |
+|---------------------------------|------------------------------------------------------|
+| `hellminer_linux64.tar.gz`      | **Default** - Standard miner version                |
+| `hellminer_linux64_avx.tar.gz`  | AVX-optimized miner for CPUs supporting AVX        |
+| `hellminer_linux64_avx2.tar.gz` | AVX2-optimized miner for CPUs supporting AVX2      |
+
+To **use an AVX-optimized version**, set `ARCH_TYPE` like this:
+```sh
+docker run -itd \
+  -e ARCH_TYPE="hellminer_linux64_avx.tar.gz" \
+  simeononsecurity/hellminer:latest
+```
+
+To **use AVX2**, simply change:
+```sh
+docker run -itd \
+  -e ARCH_TYPE="hellminer_linux64_avx2.tar.gz" \
+  simeononsecurity/hellminer:latest
+```
+
+If an **invalid value** is provided, the default (`hellminer_linux64.tar.gz`) will be used.
+
+---
+
+## **Configuration Options**
 | Environment Variable | Description |
 |----------------------|-------------|
 | `URL` | Mining pool URL (default: `na.luckpool.net`) |
@@ -49,38 +85,49 @@ docker run -itd \
 | `CPU` | Number of CPU cores to use |
 | `API_PORT` | Port for the miner's monitoring API |
 | `API_PASS` | Password for API authentication (optional) |
+| `ARCH_TYPE` | Miner binary selection (`hellminer_linux64.tar.gz`, `hellminer_linux64_avx.tar.gz`, `hellminer_linux64_avx2.tar.gz`) |
 
-### Exposed Ports
-- **${PORT}** (Mining Pool Connection)
-- **${API_PORT}** (Monitoring API, if enabled)
+---
 
-## Health Check
+## **Exposed Ports**
+- **`${PORT}`** (Mining Pool Connection)
+- **`${API_PORT}`** (Monitoring API, if enabled)
+
+---
+
+## **Health Check**
 The container includes a health check that verifies if `hellminer` is running:
 - Starts checking **after 60 seconds**.
 - Runs **every 5 seconds**.
 - If the miner is not running, the container is marked as **unhealthy**.
 
 To check the health status:
-```
+```sh
 docker inspect --format='{{.State.Health.Status}}' verusminer
 ```
 
-## Monitoring API
+---
+
+## **Monitoring API**
 The miner supports an HTTP API for monitoring when `API_PORT` is set.
-```
+```sh
 http://localhost:8080/
 ```
 Set `API_PASS` for secured access to `http://localhost:8080/admin`.
 
-## Stopping the Miner
-```
+---
+
+## **Stopping the Miner**
+```sh
 docker stop verusminer
 ```
 
-## Removing the Container
-```
+## **Removing the Container**
+```sh
 docker rm verusminer
 ```
+
+---
 
 <a href="https://simeononsecurity.ch" target="_blank" rel="noopener noreferrer">
   <h2>Explore the World of Cybersecurity</h2>
@@ -89,6 +136,15 @@ docker rm verusminer
   <img src="https://simeononsecurity.ch/img/banner.png" alt="SimeonOnSecurity Logo" width="300" height="300">
 </a>
 
-### Links:
+### **Links:**
 - #### [github.com/simeononsecurity](https://github.com/simeononsecurity)
 - #### [simeononsecurity.ch](https://simeononsecurity.ch)
+
+---
+
+### **Changes & Improvements**
+✅ Added **`ARCH_TYPE`** documentation so users can select between `AVX`, `AVX2`, and standard builds.  
+✅ Included an **invalid input fallback** to ensure the container still runs correctly.  
+✅ Provided **examples** for how to use the optimized miners.
+
+Now users can dynamically select the best miner version for their CPU while still getting the **latest** Hellminer release when they start the container. 🚀
